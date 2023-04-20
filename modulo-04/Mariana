@@ -1,0 +1,23 @@
+#Script regressão múltipla - Mariana Gouveia
+#Carregando o pacote MASS e o banco de dados Cars93:
+library(MASS)
+View(Cars93)
+carros <- data.frame(Cars93)
+View(carros)
+#Criando a variável dependente p
+p <-(carros$Price)
+#Plotando os gráficos
+plot(carros$MPG.highway, p)
+plot(carros$Rear.seat.room, p)
+#Fazendo teste de correlação
+cor.test(carros$MPG.highway, carros$Rear.seat.room)
+#O coeficiente de correlação é -0.36, logo, não há correlação alta entre as variáveis independentes
+f <- lm(p ~ carros$Rear.seat.room + carros$MPG.highway)
+summary(f)
+# a) Percentagem da variância do preço de vendo explicado pela reg. múltipla: 30,45%
+anova(f)
+plot(f)
+coef(f)
+# b) Contribuição relativa de cada variável:
+#  MPG.highway: -0.8970185 
+#  Rear.seat.room: 0.3970424 
